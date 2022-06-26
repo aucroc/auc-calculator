@@ -116,7 +116,7 @@ impl Confusion {
         return d3;
     }
 
-    pub fn from_predictions(y_prob_pred: Vec<f64>, y_true: Vec<i64>) -> Confusion {
+    pub fn from_predictions(y_true: Vec<i64>, y_prob_pred: Vec<f64>) -> Confusion {
         if y_prob_pred.len() != y_true.len() {
             panic!("Cannot have unequal lengths here.")
         }
@@ -277,41 +277,81 @@ mod confusion_tests {
 
     #[test]
     fn test_confusion_from_predictions_1() {
-        let ypred = vec![0.9, 0.8, 0.7, 0.6, 0.55, 0.54, 0.53, 0.52, 0.51, 0.505];
         let ytrue = vec![1, 1, 0, 1, 1, 1, 0, 0, 1, 0];
-        let confusion = Confusion::from_predictions(ypred, ytrue);
+        let ypred = vec![0.9, 0.8, 0.7, 0.6, 0.55, 0.54, 0.53, 0.52, 0.51, 0.505];
+        let confusion = Confusion::from_predictions(ytrue, ypred);
 
-        assert!(approx_eq!(f64, confusion.calculate_auc_pr(0.0), 0.8243055555555555, epsilon = 0.0001));
-        assert!(approx_eq!(f64, confusion.calculate_aucroc(), 0.75, epsilon = 0.0001));
+        assert!(approx_eq!(
+            f64,
+            confusion.calculate_auc_pr(0.0),
+            0.8243055555555555,
+            epsilon = 0.0001
+        ));
+        assert!(approx_eq!(
+            f64,
+            confusion.calculate_aucroc(),
+            0.75,
+            epsilon = 0.0001
+        ));
     }
 
     #[test]
     fn test_confusion_from_predictions_2() {
+        let ytrue = vec![0, 0, 0, 0, 1];
         let ypred = vec![0.75, 0.85, 0.6, 0.4, 0.0001];
-        let ytest = vec![0, 0, 0, 0, 1];
-        let confusion = Confusion::from_predictions(ypred, ytest);
+        let confusion = Confusion::from_predictions(ytrue, ypred);
 
-        assert!(approx_eq!(f64, confusion.calculate_auc_pr(0.0), 0.2, epsilon = 0.0001));
-        assert!(approx_eq!(f64, confusion.calculate_aucroc(), 0.5, epsilon = 0.0001));
+        assert!(approx_eq!(
+            f64,
+            confusion.calculate_auc_pr(0.0),
+            0.2,
+            epsilon = 0.0001
+        ));
+        assert!(approx_eq!(
+            f64,
+            confusion.calculate_aucroc(),
+            0.5,
+            epsilon = 0.0001
+        ));
     }
 
     #[test]
     fn test_confusion_from_predictions_3() {
+        let ytrue = vec![1, 1, 0, 1, 1, 1, 0, 0, 1, 0];
         let ypred = vec![0.9, 0.8, 0.7, 0.6, 0.55, 0.54, 0.53, 0.52, 0.51, 0.505];
-        let ytest = vec![1, 1, 0, 1, 1, 1, 0, 0, 1, 0];
-        let confusion = Confusion::from_predictions(ypred, ytest);
+        let confusion = Confusion::from_predictions(ytrue, ypred);
 
-        assert!(approx_eq!(f64, confusion.calculate_auc_pr(0.5), 0.3729166666666667, epsilon = 0.0001));
-        assert!(approx_eq!(f64, confusion.calculate_aucroc(), 0.75, epsilon = 0.0001));
+        assert!(approx_eq!(
+            f64,
+            confusion.calculate_auc_pr(0.5),
+            0.3729166666666667,
+            epsilon = 0.0001
+        ));
+        assert!(approx_eq!(
+            f64,
+            confusion.calculate_aucroc(),
+            0.75,
+            epsilon = 0.0001
+        ));
     }
 
     #[test]
     fn test_confusion_from_predictions_4() {
+        let ytrue = vec![1, 1, 0, 1, 1, 1, 0, 0, 1, 0];
         let ypred = vec![0.9, 0.8, 0.7, 0.6, 0.55, 0.54, 0.53, 0.52, 0.51, 0.505];
-        let ytest = vec![1, 1, 0, 1, 1, 1, 0, 0, 1, 0];
-        let confusion = Confusion::from_predictions(ypred, ytest);
+        let confusion = Confusion::from_predictions(ytrue, ypred);
 
-        assert!(approx_eq!(f64, confusion.calculate_auc_pr(1.0), 0.0, epsilon = 0.0001));
-        assert!(approx_eq!(f64, confusion.calculate_aucroc(), 0.75, epsilon = 0.0001));
+        assert!(approx_eq!(
+            f64,
+            confusion.calculate_auc_pr(1.0),
+            0.0,
+            epsilon = 0.0001
+        ));
+        assert!(approx_eq!(
+            f64,
+            confusion.calculate_aucroc(),
+            0.75,
+            epsilon = 0.0001
+        ));
     }
 }
