@@ -5,10 +5,10 @@ authors = ["hayesall <alexander@batflyer.net>"]
 edition = "2021"
 
 [package.metadata.maturin]
-python-source = "../python"
+python-source = "./"
 
 [lib]
-name = "auccalc"
+name = "_auccalculator"
 crate-type = ["cdylib"]
 
 [dependencies]
