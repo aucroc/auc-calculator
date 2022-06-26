@@ -16,7 +16,7 @@ pyo3 = "0.16.5"
 
 [dependencies.lib-auccalc]
 path = "../lib-auccalc"
-version = "0.1.0"
+version = "*"
 
 [dev-dependencies]
 float-cmp = "0.9.0"
