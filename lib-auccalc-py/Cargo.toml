@@ -1,6 +1,7 @@
 [package]
 name = "lib-auccalc-py"
 version = "0.1.0"
+authors = ["hayesall <alexander@batflyer.net>"]
 edition = "2021"
 
 [package.metadata.maturin]
