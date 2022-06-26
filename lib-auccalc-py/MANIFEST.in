@@ -1,0 +1,5 @@
+include Cargo.toml Cargo.lock
+recursive-include src *
+include ../LICENSE-APACHE
+include ../LICENSE-MIT
+include README.md
