@@ -186,23 +186,27 @@ fn interpolate(pnts: Vec<PNPoint>) -> Vec<PNPoint> {
     }
 
     let mut out = pnts.clone();
+    let mut b = 0;
 
-    for b in 0..pnts.len() - 1 {
-        let mut pnt1 = pnts[b];
-        let pnt2 = pnts[b + 1];
+    while b < out.len() - 1 {
+        let mut pnt1 = out[b];
+        let pnt2 = out[b + 1];
 
         let d1 = pnt2.pos - pnt1.pos;
         let d2 = pnt2.neg - pnt1.neg;
         let d3 = d2 / d1;
         let d4 = pnt1.pos;
-        let d5 = pnt2.neg;
+        let d5 = pnt1.neg;
 
         while (pnt1.pos - pnt2.pos).abs() > 1.001 {
             let d = d5 + (pnt1.pos - d4 + 1.0) * d3;
             let pnt = PNPoint::new(pnt1.pos + 1.0, d);
-            out.insert(b + 1, pnt);
+            b += 1;
+            out.insert(b, pnt);
             pnt1 = pnt;
         }
+
+        b += 1;
     }
 
     return out;
