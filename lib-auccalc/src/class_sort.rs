@@ -1,10 +1,25 @@
 // Copyright © 2022 Alexander L. Hayes
 // Apache 2.0 License or MIT License
 
-#[derive(Debug, PartialOrd, PartialEq)]
+use std::cmp::Ordering;
+
+#[derive(Debug, PartialEq)]
 struct ClassSort {
     probability: f64,
     classification: i64,
+}
+
+impl PartialOrd for ClassSort {
+
+    fn partial_cmp(&self, other: &ClassSort) -> Option<Ordering> {
+        if self.probability < other.probability {
+            return Some(Ordering::Less);
+        }
+        if self.probability > other.probability {
+            return Some(Ordering::Greater);
+        }
+        Some(Ordering::Equal)
+    }
 }
 
 impl ClassSort {
