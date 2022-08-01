@@ -1,5 +1,9 @@
-Work-in-progress: Rust re-implementation of the Davis/Goadrich AUC Calculator, hopefully
-making it easier to distribute native code.
+# auc-calculator (Rust)
+
+Rust re-implementation of the Davis/Goadrich AUC Calculator.
+
+**For academic use only**. See the [License](#license) section
+for details.
 
 ## Build the package + Python extension
 
@@ -17,7 +21,7 @@ maturin develop --release
 pip install -e .
 ```
 
-This implements a scikit-learn-style metrics class that takes `y_true` and `y_pred` vectors. 
+This implements a scikit-learn-style metrics class that takes `y_true` and `y_pred` vectors.
 
 ```python
 >>> from auccalculator.metrics import roc_auc_score
@@ -44,9 +48,9 @@ Or `Confusion` instances can be initialized to compute AUC-ROC and AUC-PR:
 
 ## License
 
-`auc-calculator` is available under the terms of the
+`auc-calculator` is a derivative work designed to exactly match the
+performance of the original `AUCCalculator`.
+The original was "*provided as-is for academic purposes only*,"
+and was not released under an open source license.
 
-- [Apache License, Version 2.0](LICENSE-APACHE)
-- [MIT License](LICENSE-MIT)
-
-at your choosing.
+This repository may not be used outside an academic context.
